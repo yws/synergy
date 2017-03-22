@@ -242,6 +242,12 @@ doKeyboardHookHandler(WPARAM wParam, LPARAM lParam)
 	// simulate AltGr (which is ctrl+alt) then we must not clear it.
 	UINT control = keys[VK_CONTROL] | keys[VK_LCONTROL] | keys[VK_RCONTROL];
 	UINT menu    = keys[VK_MENU] | keys[VK_LMENU] | keys[VK_RMENU];
+
+    if ((control & 0x80) && (vkCode == 0x03)) {
+        vkCode = VK_SCROLL;
+        wParam = vkCode;
+    }
+
 	if ((control & 0x80) == 0 || (menu & 0x80) == 0) {
 		keys[VK_LCONTROL] = 0;
 		keys[VK_RCONTROL] = 0;
