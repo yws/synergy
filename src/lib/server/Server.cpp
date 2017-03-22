@@ -282,21 +282,6 @@ Server::setConfig(const Config& config)
 	// cut over
 	processOptions();
 
-	// add ScrollLock as a hotkey to lock to the screen.  this was a
-	// built-in feature in earlier releases and is now supported via
-	// the user configurable hotkey mechanism.  if the user has already
-	// registered ScrollLock for something else then that will win but
-	// we will unfortunately generate a warning.  if the user has
-	// configured a LockCursorToScreenAction then we don't add
-	// ScrollLock as a hotkey.
-	if (!m_config->hasLockToScreenAction()) {
-		IPlatformScreen::KeyInfo* key =
-			IPlatformScreen::KeyInfo::alloc(kKeyScrollLock, 0, 0, 0);
-		InputFilter::Rule rule(new InputFilter::KeystrokeCondition(m_events, key));
-		rule.adoptAction(new InputFilter::LockCursorToScreenAction(m_events), true);
-		m_inputFilter->addFilterRule(rule);
-	}
-
 	// tell primary screen about reconfiguration
 	m_primaryClient->reconfigure(getActivePrimarySides());
 

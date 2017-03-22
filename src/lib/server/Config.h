@@ -403,13 +403,6 @@ public:
 	const ScreenOptions*
 						getOptions(const String& name) const;
 
-	//! Check for lock to screen action
-	/*!
-	Returns \c true if this configuration has a lock to screen action.
-	This is for backwards compatible support of ScrollLock locking.
-	*/
-	bool				hasLockToScreenAction() const;
-
 	//! Compare configurations
 	bool				operator==(const Config&) const;
 	//! Compare configurations
@@ -477,7 +470,6 @@ private:
 	NetworkAddress		m_synergyAddress;
 	ScreenOptions		m_globalOptions;
 	InputFilter			m_inputFilter;
-	bool				m_hasLockToScreenAction;
 	IEventQueue*		m_events;
 };
 

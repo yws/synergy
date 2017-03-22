@@ -36,7 +36,6 @@ using namespace synergy::string;
 
 Config::Config(IEventQueue* events) :
 	m_inputFilter(events),
-	m_hasLockToScreenAction(false),
 	m_events(events)
 {
 	// do nothing
@@ -551,12 +550,6 @@ Config::getOptions(const String& name) const
 
 	// return options
 	return options;
-}
-
-bool
-Config::hasLockToScreenAction() const
-{
-	return m_hasLockToScreenAction;
 }
 
 bool
@@ -1227,10 +1220,6 @@ Config::parseAction(ConfigReadContext& s,
 			else {
 				throw XConfigRead(s, "syntax for action: lockCursorToScreen([{off|on|toggle}])");
 			}
-		}
-
-		if (mode != InputFilter::LockCursorToScreenAction::kOff) {
-			m_hasLockToScreenAction = true;
 		}
 
 		action = new InputFilter::LockCursorToScreenAction(m_events, mode);
